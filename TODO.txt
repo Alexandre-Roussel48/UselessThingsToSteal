@@ -4,3 +4,4 @@
 - Adapt the utils.py for the models
 - Adapt the index.html
 - Implement document path from index.html to vue for url routing to work
+- setup Vite build output directory
