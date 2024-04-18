@@ -1,0 +1,18 @@
+{
+  "name": "frontendstyle_uselessthingstosteal",
+  "version": "1.0.0",
+  "description": "The frontend style of the project UselessThingsToSteal using Bulma CSS framework and Sass",
+  "main": "sass/uselessthingstosteal.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css-build": "node-sass --omit-source-map-url sass/uselessthingstosteal.scss",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "author": "Alexandre Roussel",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "bulma": "^0.9.4",
+    "node-sass": "^9.0.0"
+  }
+}
