@@ -1,58 +1,60 @@
 # UselessThingsToSteal
 
-Plateforme de collection de cartes en ligne
+**Collect the things so useless you steal them anyway**
 
-## install
+## Install
 
-precond :
+Prerequisites -> ```npm```, ```python venv```, ```docker```
 
-```
-apt-get install python3-venv
-```
-
-then :
-
-```
+```bash
 git clone https://github.com/Alexandre-Roussel48/UselessThingsToSteal.git
+
 cd UselessThingsToSteal
+
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+
+cd frontVueJS_SPA
+npm install
+cd ..
+
+cd static
+npm install
+cd ..
 ```
 
-## configuration
+## Config
 
-Rename file **config.py.sample** -> **config.py and complete informations**
 Rename file **database/docker-compose.yml.sample** -> **database/docker-compose.yml and complete informations**
+Rename file **config.py.sample** -> **config.py and complete informations**
 
 You can add or remove cards **carefully** in **models/__init__.py**.
 
 First time :
 
-```
-cd UselessThingsToSteal
+```bash
+cd database
+docker compose up --build &
+cd ..
+
 source venv/bin/activate
 python
 >>> import models
 >>> models.create_db()
-```
-
-Then :
-
-```
-cd UselessThingsToSteal
-source venv/bin/activate
-python
->>> import models
 >>> models.pop_cards()
+(ctrl-d)
+
+fg
+(ctrl-c)
 ```
 
-## run (development mode)
+## Run (development mode)
 
-```
+```bash
 	rundev.sh
 cd database
-docker compose up --build &&
+docker compose up --build &
 cd ..
 
 source venv/bin/activate
@@ -61,12 +63,21 @@ export FLASK_APP=server.py
 flask run
 ```
 
-## run (server mode)
-
+```bash
+cd frontVueJS_SPA
+npm run dev
 ```
+
+## Production
+
+**TODO**
+
+## Run (server mode)
+
+```bash
 	run.sh
 cd database
-docker compose up --build &&
+docker compose up --build &
 cd ..
 
 kill $(cat UselessThingsToSteal.pid)
