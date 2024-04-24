@@ -1,4 +1,4 @@
-import "../../static/sass/uselessthingstosteal.scss"
+import "../sass/uselessthingstosteal.scss"
 
 import { createApp } from 'vue'
 import { createStore } from 'vuex'
@@ -15,18 +15,31 @@ const store = createStore({
   state () {
     return {
       username: "",
-      token: ""
+      token: "",
+      connection_count: -1,
+      next_card: "",
+      next_theft: ""
     }
   },
   mutations: {
     set_user_data (state, payload) {
   		state.username = payload.username;
   		state.token = payload.token;
+      state.connection_count = payload.connection_count;
+    },
+    set_next_card (state, payload) {
+      state.next_card = payload.next_card;
+    },
+    set_next_theft (state, payload) {
+      state.next_theft = payload.next_theft;
     }
   },
   getters: {
     is_connected (state) {
       return state.username != "" && state.token != "";
+    },
+    is_first_time (state) {
+      return state.connection_count;
     }
   }
 })

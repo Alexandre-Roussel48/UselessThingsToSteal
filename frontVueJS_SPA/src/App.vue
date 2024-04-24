@@ -7,5 +7,5 @@ import Navbar from '@/components/app/navbar.vue'
   <header>
     <Navbar />
   </header>
-  <RouterView />
+  <RouterView class="home_height has-background-info"/>
 </template>

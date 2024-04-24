@@ -2,16 +2,17 @@
 
 import Login from '@/components/home/login.vue'
 import Register from '@/components/home/register.vue'
+import Tutorial from '@/components/home/tutorial.vue'
 
 export default {
   name: 'home',
-  components: {Login, Register}
+  components: {Login, Register, Tutorial}
 }
 
 </script>
 
 <template>
-  <main class="home_height has-background-info">
+  <main>
     <section class="section" v-if="!this.$store.getters.is_connected">
       <div class="columns">
         <div class="column is-3 is-offset-3">
@@ -21,6 +22,9 @@ export default {
           <Register />
         </div>
       </div>
+    </section>
+    <section v-else>
+      <Tutorial v-if="this.$store.getters.is_first_time" />
     </section>
   </main>
 </template>

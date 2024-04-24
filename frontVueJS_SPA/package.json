@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "css-build": "node-sass --omit-source-map-url sass/uselessthingstosteal.scss",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -21,6 +24,8 @@
     "@vitejs/plugin-vue": "^5.0.4",
     "sass": "^1.65.1",
     "sass-loader": "^13.3.2",
-    "vite": "^5.2.8"
+    "vite": "^5.2.8",
+    "bulma": "^0.9.4",
+    "node-sass": "^9.0.0"
   }
 }

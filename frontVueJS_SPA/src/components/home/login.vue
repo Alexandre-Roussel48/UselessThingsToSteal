@@ -28,8 +28,11 @@ export default {
         } else {
           this.$store.commit('set_user_data', {
             username: this.username,
-            token: data['token']
+            token: data['token'],
+            connection_count: data['connection_count']
           });
+          this.$store.commit('set_next_card', {next_card: data['next_card']});
+          this.$store.commit('set_next_theft', {next_theft: data['next_theft']});
         }
       });
     }
