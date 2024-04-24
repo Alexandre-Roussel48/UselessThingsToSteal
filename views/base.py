@@ -35,10 +35,15 @@ def login():
     if 'username' not in data or 'password' not in data:
         return json.dumps({'status': 'Username and password are required'}), 400
 
-    user_id = user.get_user(data)
+    user_data = user.check_user(data)
 
-    if user_id is None:
+    if user_data is None:
         return json.dumps({'status': 'Invalid username or password'}), 401
     else:
-        token = jwt.encode({'user_id': user_id, 'exp':datetime.utcnow() + timedelta(minutes=60)}, current_app.config['SECRET_KEY'], algorithm='HS256')
-        return json.dumps({'token': token})
+        token = jwt.encode({'user_id': user_data['id'], 'exp':datetime.utcnow() + timedelta(minutes=60)}, current_app.config['SECRET_KEY'], algorithm='HS256')
+        print(user_data['next_card'])
+        return json.dumps({
+            'token': token,
+            'connection_count': user_data['connection_count'],
+            'next_card': user_data['next_card'].isoformat(),
+            'next_theft': user_data['next_theft'].isoformat()})
