@@ -12,7 +12,6 @@ import peewee
 
 from server import db
 from .card.card import Card
-from .inventory.inventory import Inventory
 from .theft.theft import Theft
 from .user.user import User
 from .vault.vault import Vault
@@ -26,7 +25,7 @@ def create_db():
         Vault,
         Card,
         User,
-        Inventory
+        User.inventory.get_through_model()
         ])
 
 def pop_cards():

@@ -1,7 +1,8 @@
 from peewee import *
 
 from server import BaseModel
-from datetime import date
+from datetime import datetime
+from models.card.card import Card
 
 class User(BaseModel):
     '''
@@ -19,8 +20,10 @@ class User(BaseModel):
     username = CharField(max_length=100)
     password_hash = CharField(max_length=200)
     password_salt = CharField(max_length=100)
-    next_card = DateField(default=date.today())
-    next_theft = DateField(default=date.today())
+    connection_count = IntegerField()
+    next_card = DateTimeField(default=datetime.utcnow(), formats='%Y-%m-%d %H:%M:%S')
+    next_theft = DateTimeField(default=datetime.utcnow(), formats='%Y-%m-%d %H:%M:%S')
+    inventory = ManyToManyField(Card, backref='users')
 
     def toDict(self):
         '''
@@ -33,6 +36,7 @@ class User(BaseModel):
         data = {
             'id':self.id,
             'username':self.username,
+            'connection_count':self.connection_count,
             'next_card':self.next_card,
             'next_theft':self.next_theft
         }
