@@ -7,7 +7,6 @@ from itsdangerous import (
         BadSignature)
 
 import config
-import json
 
 app = Flask('__name__')
 CORS(app)
@@ -60,7 +59,6 @@ def _db_close(exc):
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all(path):
-    print(path)
     return render_template('index.html', path={'path':path})
 
 if __name__ == '__main__':
