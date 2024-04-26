@@ -6,14 +6,11 @@
 $family-sans-serif: "Roboto", sans-serif;
 $family-secondary: "Roboto", serif;
 $primary: #222222; // Used
-$secondary: #251136;
+$secondary: #e4e2dd; // Used
 $success: #39ff14; // Used
 $info: #19d878;
-$widescreen-enabled: false;
-$fullhd-enabled: false;
-
-// Update some of Bulma's component variables
-$control-border-width: 2px;
+$modal-content-width: 75%;
+$navbar-height: 8rem;
 
 @import "../node_modules/bulma/bulma.sass";
 
@@ -41,6 +38,28 @@ $control-border-width: 2px;
 }
 
 .home_height {
-	min-height: 100vh;
+	min-height: calc(100vh - $navbar-height);
 	height: 100%;
+	padding-bottom: 50px;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.pulsate {
+  transition: transform 0.2s ease-in-out;
+  animation: pulsate 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
