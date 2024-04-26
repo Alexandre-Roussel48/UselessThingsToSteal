@@ -57,6 +57,7 @@ def check_user(data):
     for user in matching_users:
         if check_password_hash(user.password_hash, data['password'] + user.password_salt):
             user.connection_count += 1
+            user.save()
             return user.toDict()
     return None
 
