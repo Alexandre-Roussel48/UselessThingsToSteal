@@ -23,8 +23,6 @@ export default {
         </div>
       </div>
     </section>
-    <section v-else>
-      <Tutorial v-if="this.$store.getters.is_first_time" />
-    </section>
+    <Tutorial v-else v-if="this.$store.getters.is_first_time" />
   </main>
 </template>

@@ -71,10 +71,10 @@ export default {
       <small v-if="this.status != ''">{{this.status}}</small>
       <p class="control">
         <button class="button is-success" v-if="can_login" v-on:click.prevent="login()">
-          Login
+          <span>Login</span>
         </button>
         <button class="button is-success" disabled v-else>
-          Login
+          <span>Login</span>
         </button>
       </p>
     </div>

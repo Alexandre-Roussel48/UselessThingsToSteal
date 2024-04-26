@@ -27,6 +27,9 @@ export default {
         <RouterLink to="/inventory" class="navbar-item">
           <img class="header_category" src="@/assets/inventory.svg">
         </RouterLink>
+        <RouterLink to="/vault" class="navbar-item">
+          <img class="header_category" src="@/assets/vault.svg">
+        </RouterLink>
       </div>
       <div class="navbar-end">
         <RouterLink to="/theft" class="navbar-item">
@@ -40,7 +43,7 @@ export default {
         </RouterLink>
         <div class="navbar-item">
           <button class="button is-success" v-on:click.prevent="logout()">
-            Log out
+            <span>Log out</span>
           </button>
         </div>
       </div>

@@ -7,7 +7,7 @@ export default {
 </script>
 
 <template>
-  <main class="home_height has-background-info">
+  <main>
     <div v-if="this.$store.getters.is_connected">
       <div class="header_long">
         <img src="@/assets/drop.svg">

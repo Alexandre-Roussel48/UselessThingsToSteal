@@ -7,9 +7,9 @@ import router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLock, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faLock)
+library.add(faUser, faLock, faCaretLeft, faCaretRight)
 
 const store = createStore({
   state () {
@@ -32,6 +32,9 @@ const store = createStore({
     },
     set_next_theft (state, payload) {
       state.next_theft = payload.next_theft;
+    },
+    disable_tutorial (state) {
+      state.connection_count = -1;
     }
   },
   getters: {
@@ -39,7 +42,7 @@ const store = createStore({
       return state.username != "" && state.token != "";
     },
     is_first_time (state) {
-      return state.connection_count;
+      return state.connection_count == 0;
     }
   }
 })

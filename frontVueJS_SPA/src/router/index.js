@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/InventoryView.vue')
     },
     {
+      path: '/vault',
+      name: 'vault',
+      component: () => import('../views/VaultView.vue')
+    },
+    {
       path: '/theft',
       name: 'theft',
       component: () => import('../views/TheftView.vue')
