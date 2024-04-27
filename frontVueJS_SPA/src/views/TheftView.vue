@@ -4,7 +4,20 @@ export default {
   name: 'theft',
   data () {
     return {
-      timer : -1
+      timer : -1,
+      card : {}
+    }
+  },
+  methods: {
+    async theft() {
+      let response = await fetch(`${this.$url_prefix}/user/theft`, {
+        method: 'POST',
+        headers: {
+          'Content-Type':'application/json',
+          'Authorization': this.$store.state.token
+        }
+      });
+      this.card = await response.json();
     }
   },
   watch: {
@@ -20,7 +33,7 @@ export default {
     }
   },
   mounted () {
-    this.timer = Math.trunc(this.$store.getters.next_theft / 1000);
+    this.timer = this.$store.getters.next_theft;
   }
 }
 
@@ -42,7 +55,7 @@ export default {
               <h3 class="title" v-else>Next theft NOW ! 🥷</h3>
             </div>
             <div class="column is-12 header_long">
-              <button class="button is-large is-success" v-if="timer == 0">THEFT</button>
+              <button class="button is-large is-success" v-if="timer == 0" v-on:click.prevent="theft()">THEFT</button>
               <button class="button is-large is-success" disabled v-else>THEFT</button>
             </div>
           </div>

@@ -102,3 +102,13 @@ $navbar-height: 8rem;
 	transform: translateX(33%);
 	animation: coverLeftToRight 4s linear forwards;
 }
+
+.drop_card_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.drop_card {
+  width: 30rem;
+}

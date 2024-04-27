@@ -15,6 +15,7 @@ from .card.card import Card
 from .theft.theft import Theft
 from .user.user import User
 from .vault.vault import Vault
+from .user.user import Inventory
 
 def create_db():
     '''
@@ -25,7 +26,7 @@ def create_db():
         Vault,
         Card,
         User,
-        User.inventory.get_through_model()
+        Inventory
         ])
 
 def pop_cards():

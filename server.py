@@ -26,16 +26,11 @@ class BaseModel(Model):
         database = db
 
 from views import (
-    theft,
-    inventory,
     user,
     base
 )
 
 app.register_blueprint(base.views)
-
-app.register_blueprint(theft.views, url_prefix='/theft')
-app.register_blueprint(inventory.views, url_prefix='/inventory')
 app.register_blueprint(user.views, url_prefix='/user')
 
 

@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     async get_cards() {
-      let response = await fetch(`${this.$url_prefix}/inventory/get_cards`, {
+      let response = await fetch(`${this.$url_prefix}/user/get_cards`, {
         method: 'POST',
         headers: {
           'Content-Type':'application/json',

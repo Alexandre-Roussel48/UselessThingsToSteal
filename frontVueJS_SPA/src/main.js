@@ -45,14 +45,14 @@ const store = createStore({
       return state.connection_count == 0;
     },
     next_card (state) {
-      const now = Date.now();
-      const next_card = new Date(state.next_card);
-      return (next_card - now) > 0 ? (next_card - now) : 0;
+      const now = new Date(new Date().toISOString()).getTime();
+      const next_card = new Date(state.next_card).getTime();
+      return (next_card - now) > 0 ? Math.trunc((next_card - now)/1000) : 0;
     },
     next_theft (state) {
-      const now = Date.now();
-      const next_theft = new Date(state.next_theft);
-      return (next_theft - now) > 0 ? (next_theft - now) : 0;
+      const now = new Date(new Date().toISOString()).getTime();
+      const next_theft = new Date(state.next_theft).getTime();
+      return (next_theft - now) > 0 ? Math.trunc((next_theft - now)/1000) : 0;
     }
   }
 })

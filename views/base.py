@@ -41,9 +41,8 @@ def login():
         return json.dumps({'status': 'Invalid username or password'}), 401
     else:
         token = jwt.encode({'user_id': user_data['id'], 'exp':datetime.utcnow() + timedelta(minutes=60)}, current_app.config['SECRET_KEY'], algorithm='HS256')
-        print(user_data['next_card'])
         return json.dumps({
             'token': token,
             'connection_count': user_data['connection_count'],
-            'next_card': user_data['next_card'].isoformat(),
-            'next_theft': user_data['next_theft'].isoformat()})
+            'next_card': user_data['next_card'],
+            'next_theft': user_data['next_theft']})

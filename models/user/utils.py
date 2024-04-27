@@ -1,8 +1,10 @@
 import uuid
 import random
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime, timedelta
 
 from models.user.user import User
+from models.user.user import Inventory
 from models.card.card import Card
 
 #====================User====================#
@@ -28,12 +30,10 @@ def create_or_update_user(data):
             password_hash = generate_password_hash(data['password'] + salt),
             password_salt = salt)
         starter = random.choices(Card.select().where(Card.rarity=='common')[:], k=5)
-        user.inventory.clear()
         for card in starter:
-            try:
-                user.inventory.add(card)
-            except Exception:
-                pass
+            Inventory.create(
+                user_id=user.id,
+                card_id=card.id)
     else:
         user = User.get(id=data['id'])
         user.username = data['username']
@@ -63,12 +63,33 @@ def check_user(data):
 
 def get_inventory(user_id):
     '''
-    Renvoie l'inventaire de l'objet User dont l'username a été passé en paramètre.
+    Renvoie l'inventaire de l'objet User dont l'id a été passé en paramètre.
 
         Param(s):
                 | user_id (uuid): id de l'user
 
         Return(s):
-                | inventory (Card[]): objets Card à partir de l'username
+                | inventory (Card[]): objets Card à partir de l'id
     '''
-    return User.get(id=user_id).inventory[:]
+    return [Card.get(id=inventory.card_id) for inventory in Inventory.select().where(Inventory.user_id==user_id)[:]]
+
+def drop_card(user_id):
+    '''
+    Ajoute une carte aleatoire a l'inventaire de l'objet User dont l'id a été passé en paramètre.
+
+        Param(s):
+                | user_id (uuid): id de l'user
+
+        Return(s):
+                | card (Card): objet Card ajoute a l'inventaire
+    '''
+    user = User.get(id=user_id)
+    if user.next_card > datetime.utcnow():
+        return None
+    user.next_card = datetime.utcnow() + timedelta(minutes=1)
+    user.save()
+    drop = random.choices(Card.select().where(Card.rarity=='common')[:], k=1)[0]
+    Inventory.create(
+        user_id=user_id,
+        card_id=drop.id)
+    return {'drop':drop.toDict(),'next_card':user.next_card.isoformat() + 'Z'}

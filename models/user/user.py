@@ -23,7 +23,6 @@ class User(BaseModel):
     connection_count = IntegerField()
     next_card = DateTimeField(default=datetime.utcnow(), formats='%Y-%m-%d %H:%M:%S')
     next_theft = DateTimeField(default=datetime.utcnow(), formats='%Y-%m-%d %H:%M:%S')
-    inventory = ManyToManyField(Card, backref='users')
 
     def toDict(self):
         '''
@@ -37,8 +36,13 @@ class User(BaseModel):
             'id':self.id,
             'username':self.username,
             'connection_count':self.connection_count,
-            'next_card':self.next_card,
-            'next_theft':self.next_theft
+            'next_card':self.next_card.isoformat() + 'Z',
+            'next_theft':self.next_theft.isoformat() + 'Z'
         }
 
         return data
+
+class Inventory(BaseModel):
+    id = AutoField(primary_key=True)
+    user_id = ForeignKeyField(User)
+    card_id = ForeignKeyField(Card)
