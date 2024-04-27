@@ -43,6 +43,16 @@ const store = createStore({
     },
     is_first_time (state) {
       return state.connection_count == 0;
+    },
+    next_card (state) {
+      const now = Date.now();
+      const next_card = new Date(state.next_card);
+      return (next_card - now) > 0 ? (next_card - now) : 0;
+    },
+    next_theft (state) {
+      const now = Date.now();
+      const next_theft = new Date(state.next_theft);
+      return (next_theft - now) > 0 ? (next_theft - now) : 0;
     }
   }
 })

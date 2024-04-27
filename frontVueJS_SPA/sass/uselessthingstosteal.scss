@@ -87,15 +87,18 @@ $navbar-height: 8rem;
 }
 
 @keyframes coverLeftToRight {
-  100% {
+  50% {
     transform: translateX(65%);
+  }
+  100% {
+    transform: translateX(2000%);
   }
 }
 
 .view-cover {
 	position: absolute;
-	height: 100%;
+	height: 250px;
 	width: 100%;
 	transform: translateX(33%);
-	animation: coverLeftToRight 2s linear forwards;
+	animation: coverLeftToRight 4s linear forwards;
 }
