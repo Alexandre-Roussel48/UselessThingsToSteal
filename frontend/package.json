@@ -1,0 +1,32 @@
+{
+  "name": "uselessthingstosteal",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "css-build": "node-sass --omit-source-map-url sass/uselessthingstosteal.scss",
+    "css-watch": "npm run css-build -- --watch",
+    "start": "npm run css-watch"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
+    "vue": "^3.4.21",
+    "vue-native-websocket": "^2.0.15",
+    "vue-router": "^4.3.0",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "bulma": "^0.9.4",
+    "node-sass": "^9.0.0",
+    "sass": "^1.65.1",
+    "sass-loader": "^13.3.2",
+    "vite": "^5.2.8"
+  }
+}

@@ -1,9 +1,4 @@
-- Adapt the run.sh for later
 - Adapt the gitignore file
-- Adapt the server.py file
-- Adapt the utils.py for the models
-- Adapt the index.html
-- Implement document path from index.html to vue for url routing to work
-- setup Vite build output directory\
-- Register login automatique
+- setup Vite build output directory
 - Factoriser css
+- Page accueil, box scrollable leaderboard
