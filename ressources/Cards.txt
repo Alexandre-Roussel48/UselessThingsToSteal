@@ -13,39 +13,37 @@
 - Cable RJ45 (common) [x]
 - Pot-a-eau (common) [x]
 
-- Canette de 8.6 (vide) (uncommon)
-- Cuillere en plastique (uncommon)
-- Parpaingggg (uncommon)
-- Verre du tarbrew (uncommon)
-- ventouse a chiotte (uncommon)
-- 1 Kapla (uncommon)
-- Bouteille de lait perime (uncommon)
-- 5 rouleaux vides de PQ (uncommon)
-- molette de souris (uncommon)
-- Mousqueton (uncommon)
-- enjoliveur (uncommon)
-- Dalle du plafond (uncommon)
-- tuyau de douche (uncommon)
-- PC ventilateur (uncommon)
-- Thermostat (uncommon)
+- Canette de 8.6 (vide) (uncommon) [x]
+- Parpaingggg (uncommon) [x]
+- Verre du tarbrew (uncommon) [x]
+- ventouse a chiotte (uncommon) [x]
+- 1 Kapla (uncommon) [x]
+- Bouteille de lait perime (uncommon) [x]
+- 4 rouleaux vides de PQ (uncommon) [x]
+- molette de souris (uncommon) [x]
+- Mousqueton (uncommon) [x]
+- enjoliveur (uncommon) [x]
+- Dalle du plafond (uncommon) [x]
+- tuyau de douche (uncommon) [x]
+- PC ventilateur (uncommon) [x]
+- Thermostat (uncommon) [x]
 
-- 15 feutres veleda (rare)
-- Masque de cheval (rare)
-- DVD Qu'est ce qu'on a fait au bon dieu (rare)
-- Harmonica (rare)
-- Rat DCD (rare)
-- essuie-glace (rare)
-- plaque d'egout (rare)
-- cuvette de chiotte (rare)
+- 3 feutres veleda (rare) [x]
+- Masque de cheval (rare) [x]
+- DVD Qu'est ce qu'on a fait au bon dieu (rare) [x]
+- Harmonica (rare) [x]
+- hamster (rare) [x]
+- essuie-glace (rare) [x]
+- plaque d'egout (rare) [x]
+- cuvette de chiotte (rare) [x]
 
-- Feu tricolore (epic)
-- Masque a gaz (epic)
-- gopro du seigneur (epic)
-- 52 paquet de clopes vides (epic)
-- Un petshop bleu (epic)
-- Flipper 3.0 (epic)
+- Feu tricolore (epic) [x]
+- Masque a gaz (epic) [x]
+- gopro du seigneur (epic) [x]
+- 52 paquet de clopes vides (epic) [x]
+- Flipper 3.0 (epic) [x]
 
-- Panneau Montpellier (legendaire)
-- Machine Bibal (legendaire)
-- Bus TAM (legendaire)
-- Seigneurie C15 (legendaire)
+- Panneau Montpellier (legendaire) [x]
+- Machine Bibal (legendaire) [x]
+- Bus TAM (legendaire) [x]
+- Seigneurie C15 (legendaire) [x]
