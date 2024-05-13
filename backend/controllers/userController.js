@@ -1,22 +1,28 @@
-const { getInventory, getVault, dropCard, theftCard } = require('../models/userModel');
+const { getInventory, getForge, getVault, dropCard, theftCard, updateLastConnection, createVault, updateForge, deleteForge, deleteVault } = require('../models/userModel');
 const userIdToWsMap = require('../websocket/websocketManager');
 
 exports.getInventory = async (req, res) => {
-  try {
-    const inventory = await getInventory(req.authData.user_id);
-    res.json(inventory);
-  } catch (error) {
-    throw new Error(`Error converting inventory to JSON: ${error.message}`);
+  const inventory = await getInventory(req.authData.user_id);
+  if (!inventory) {
+    return res.status(400).json({ status: 'Error getting inventory' });
   }
+  res.json(inventory);
+};
+
+exports.getForge = async (req, res) => {
+  const forge = await getForge(req.authData.user_id);
+  if (!forge) {
+    return res.status(400).json({ status: 'Error getting forge' });
+  }
+  res.json(forge);
 };
 
 exports.getVault = async (req, res) => {
-  try {
-    const vault = await getVault(req.authData.user_id);
-    res.json(vault);
-  } catch (error) {
-    throw new Error(`Error converting inventory to JSON: ${error.message}`);
+  const vault = await getVault(req.authData.user_id);
+  if (!vault) {
+    return res.status(400).json({ status: 'Error getting vault' });
   }
+  res.json(vault);
 };
 
 exports.drop = async (req, res) => {
@@ -53,3 +59,37 @@ exports.theft = async (req, res) => {
     next_theft: theftData.next_theft
   });
 };
+
+exports.setLastConnection = async (req, res) => {
+  await updateLastConnection(req.authData.user_id);
+  return res.status(200).json({ status: 'Last connection set' });
+};
+
+exports.inventoryCard = async (req, res) => {
+  let code;
+  if (req.body.from == 'forge') {
+    code = await deleteForge(req.authData.user_id, req.body.card);
+  } else if (req.body.from == 'vault') {
+    code = await deleteVault(req.authData.user_id, req.body.card);
+  }
+  if (!code) {
+    return res.status(401).json({ status: 'No get back' });
+  }
+  return res.status(200).json({ status: 'Card sent to inventory' });  
+}
+
+exports.vaultCard = async (req, res) => {
+  const code = await createVault(req.authData.user_id, req.body.card);
+  if (!code) {
+    return res.status(401).json({ status: 'No get back' });
+  }
+  return res.status(200).json({ status: 'Card vaulted' });
+}
+
+exports.forgeCard = async (req, res) => {
+  const code = await updateForge(req.authData.user_id, req.body.card);
+  if (!code) {
+    return res.status(401).json({ status: 'No get back' });
+  }
+  return res.status(200).json({ status: 'Card sent to forge' });
+}

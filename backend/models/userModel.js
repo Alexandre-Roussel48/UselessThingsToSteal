@@ -11,7 +11,6 @@ async function createOrUpdateUser(data) {
         let user;
 
         if (!data.id) {
-            // Create new user
             const hashedPassword = await bcrypt.hash(data.password + salt, 10);
             user = await prisma.user.create({
                 data: {
@@ -56,7 +55,7 @@ async function createOrUpdateUser(data) {
 
         return user.id;
     } catch (error) {
-        throw new Error(`Error in create_or_update_user function: ${error.message}`);
+        throw new Error(`Error in createOrUpdateUser function: ${error.message}`);
     }
 }
 
@@ -70,7 +69,6 @@ async function checkUser(data) {
 
         for (const user of matchingUsers) {
             if (await bcrypt.compare(data.password + user.password_salt, user.password_hash)) {
-                // If password matches, update connection count and return user data
                 await prisma.user.update({
                     where: {
                         id: user.id
@@ -84,23 +82,14 @@ async function checkUser(data) {
                     where: { id: user.id }
                 });
 
-                await prisma.user.update({
-                    where: {
-                        id: user.id
-                    },
-                    data: {
-                        last_connection: new Date(Date.now())
-                    }
-                });
-
                 const thefts = await prisma.theft.findMany({
                     where: {
-                        victim_id: user.id
+                        victim_id: user.id,
+                        date: {
+                            gt: user.last_connection
+                        }
                     }
                 });
-                        /*date: {
-                            gt: user.last_connection
-                        }*/
 
                 const reformattedThefts = await Promise.all(thefts.map(async (theft) => {
                     const card = await prisma.card.findUnique({
@@ -126,10 +115,32 @@ async function checkUser(data) {
             }
         }
 
-        return null; // If no matching user found or password doesn't match
+        return null;
     } catch (error) {
-        // Handle errors
-        throw new Error(`Error in check_user function: ${error.message}`);
+        throw new Error(`Error in checkUser function: ${error.message}`);
+    }
+}
+
+async function getForge(userId) {
+    try {
+        const inventories = await prisma.inventory.findMany({
+            where: {
+                user_id: userId,
+                forge: true
+            }
+        });
+        const cardIds = inventories.map(inventory => inventory.card_id);
+        const cards = [];
+        for (index in cardIds) {
+            cards.push(await prisma.card.findUnique({
+                where: {
+                    id: cardIds[index]
+                }
+            }));
+        }
+        return cards;
+    } catch (error) {
+        throw new Error(`Error fetching inventory: ${error.message}`);
     }
 }
 
@@ -137,17 +148,19 @@ async function getInventory(userId) {
     try {
         const inventories = await prisma.inventory.findMany({
             where: {
-                user_id: userId
+                user_id: userId,
+                forge: false
             }
         });
         const cardIds = inventories.map(inventory => inventory.card_id);
-        const cards = await prisma.card.findMany({
-            where: {
-                id: {
-                    in: cardIds
+        const cards = [];
+        for (index in cardIds) {
+            cards.push(await prisma.card.findUnique({
+                where: {
+                    id: cardIds[index]
                 }
-            }
-        });
+            }));
+        }
         return cards;
     } catch (error) {
         throw new Error(`Error fetching inventory: ${error.message}`);
@@ -225,13 +238,11 @@ async function theftCard(userId) {
 
         const updatedUser = await prisma.user.update({
             where: { id: userId },
-            data: { next_theft: new Date(Date.now() + 10000) }, // 1 minute from now
+            data: { next_theft: new Date(Date.now() + 10000) },
         });
 
-        // Create or update theft logic goes here
         const theftId = await createOrUpdateTheft(userId);
 
-        // Assuming theftId is the id of the theft record
         const theft = await prisma.theft.findUnique({
             where: { id: theftId },
         });
@@ -260,9 +271,153 @@ async function theftCard(userId) {
 
         return { card: card, next_theft: updatedUser.next_theft, thief : user.username, victim_id : theft.victim_id};
     } catch (error) {
-        console.log(error.message);
-        return null;
+        throw new Error(`Error fetching theft: ${error.message}`);
     }
+}
+
+async function updateLastConnection(userId) {
+    try {
+        await prisma.user.update({
+            where: {
+                id: userId
+            },
+            data: {
+                last_connection: new Date(Date.now())
+            }
+        });
+    } catch (error) {
+        throw new Error(`Error updating last connection: ${error.message}`);
+    }
+}
+
+async function createVault(userId, card) {
+    try {
+        const oldVault = await prisma.vault.findUnique({
+            where: {
+                user_id_rarity: {
+                    user_id: userId,
+                    rarity: card.rarity
+                }
+            }
+        });
+
+        if (oldVault) {
+            await prisma.vault.deleteMany({
+                where: {
+                    id: oldVault.id
+                }
+            });
+
+            await prisma.inventory.create({
+                data: {
+                    user_id: userId,
+                    card_id: oldVault.card_id
+                }
+            });
+        }
+        await prisma.vault.create({
+            data: {
+                user_id: userId,
+                card_id: card.id,
+                rarity: card.rarity
+            }
+        });
+
+        const inventoryToDelete = await prisma.inventory.findFirst({
+            where: {
+                user_id: userId,
+                card_id: card.id
+            }
+        });
+
+        await prisma.inventory.deleteMany({
+            where: { id: inventoryToDelete.id },
+        });
+
+        return 1;
+    } catch (error) {
+        throw new Error(`Error in createVault function: ${error.message}`);
+    }
+}
+
+async function updateForge(userId, card) {
+    try {
+        const inventory = await prisma.inventory.findFirst({
+            where: {
+                user_id : userId,
+                card_id : card.id,
+                forge : false
+            }
+        });
+
+        await prisma.inventory.update({
+            where: {
+                id: inventory.id
+            },
+            data: {
+                forge : true
+            }
+        });
+
+        return 1;
+    } catch (error) {
+        throw new Error(`Error in updateForge function: ${error.message}`);
+    }  
+}
+
+async function deleteForge(userId, card) {
+    try {
+        const inventory = await prisma.inventory.findFirst({
+            where: {
+                user_id : userId,
+                card_id : card.id,
+                forge : true
+            }
+        });
+
+        await prisma.inventory.update({
+            where: {
+                id: inventory.id
+            },
+            data: {
+                forge : false
+            }
+        });
+
+        return 1;
+    } catch (error) {
+        throw new Error(`Error in updateForge function: ${error.message}`);
+    }  
+}
+
+async function deleteVault(userId, card) {
+    try {
+        const oldVault = await prisma.vault.findUnique({
+            where: {
+                user_id_rarity: {
+                    user_id: userId,
+                    rarity: card.rarity
+                }
+            }
+        });
+
+        await prisma.vault.deleteMany({
+            where: {
+                id: oldVault.id
+            }
+        });
+
+        await prisma.inventory.create({
+            data: {
+                user_id: userId,
+                card_id: oldVault.card_id
+            }
+        });
+
+        return 1;
+    } catch (error) {
+        throw new Error(`Error in updateForge function: ${error.message}`);
+    }  
 }
 
 module.exports = {
@@ -270,6 +425,12 @@ module.exports = {
     checkUser,
     getInventory,
     getVault,
+    getForge,
     dropCard,
-    theftCard
+    theftCard,
+    updateLastConnection,
+    createVault,
+    updateForge,
+    deleteForge,
+    deleteVault
 };

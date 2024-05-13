@@ -37,6 +37,7 @@ model Inventory {
   user_id          String
   card             Card        @relation(fields: [card_id], references: [id])
   card_id          Int
+  forge            Boolean     @default(false)
 }
 
 model Vault {
