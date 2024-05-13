@@ -8,11 +8,11 @@ stop_processes() {
 
 trap stop_processes SIGINT
 
-cd database
+cd UTTS_database
 docker compose up --build &
 cd ..
 
-cd backend
+cd UTTS_backend
 npm run back &
 
 wait

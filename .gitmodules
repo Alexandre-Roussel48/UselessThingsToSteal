@@ -1,9 +1,9 @@
-[submodule "UTTS_database"]
-	path = database
-	url = git@github.com:Alexandre-Roussel48/UTTS_database.git
-[submodule "UTTS_frontend"]
-	path = frontend
-	url = git@github.com:Alexandre-Roussel48/UTTS_frontend.git
 [submodule "UTTS_backend"]
-	path = backend
+	path = UTTS_backend
 	url = git@github.com:Alexandre-Roussel48/UTTS_backend.git
+[submodule "UTTS_frontend"]
+	path = UTTS_frontend
+	url = git@github.com:Alexandre-Roussel48/UTTS_frontend.git
+[submodule "UTTS_database"]
+	path = UTTS_database
+	url = git@github.com:Alexandre-Roussel48/UTTS_database.git
