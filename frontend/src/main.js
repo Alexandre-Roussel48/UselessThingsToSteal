@@ -6,9 +6,9 @@ import router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUser, faLock, faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLock, faCaretLeft, faCaretRight, faToolbox, faHammer, faCube } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faLock, faCaretLeft, faCaretRight)
+library.add(faUser, faLock, faCaretLeft, faCaretRight, faToolbox, faHammer, faCube)
 
 const store = createStore({
   state () {

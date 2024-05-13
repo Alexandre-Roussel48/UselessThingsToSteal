@@ -19,18 +19,18 @@ export default {
           'authorization': 'Bearer ' + this.$store.state.token
         }
       });
-      return await response.json();
+      this.vault = await response.json();
     }
   },
   async mounted () {
-    this.vault = await this.get_vault();
+    await this.get_vault();
   }
 }
 
 </script>
 
 <template>
-  <main v-if="this.$store.getters.is_connected">
+  <main>
     <div class="header_long">
       <img src="@/assets/canister.svg" class="image-animation">
       <div class="has-background-info view-cover"></div>
@@ -41,7 +41,7 @@ export default {
         <div class="columns is-multiline">
           <div class="column is-1"></div>
           <div class="column is-2" v-for="card in this.vault">
-            <Display :card_data="card"/>
+            <Display :card_data="card" @rerender="get_vault"/>
           </div>
         </div>
       </div>

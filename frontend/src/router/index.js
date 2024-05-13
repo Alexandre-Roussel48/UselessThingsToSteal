@@ -20,6 +20,11 @@ const router = createRouter({
       component: () => import('../views/VaultView.vue')
     },
     {
+      path: '/forge',
+      name: 'forge',
+      component: () => import('../views/ForgeView.vue')
+    },
+    {
       path: '/theft',
       name: 'theft',
       component: () => import('../views/TheftView.vue')

@@ -13,7 +13,7 @@ export default {
         },
         body: JSON.stringify({
           'card':this.card_data,
-          'from':'vault'
+          'from': 'forge'
         })
       })
       .then(response => {
@@ -33,6 +33,7 @@ export default {
           <font-awesome-icon :icon="['fas', 'cube']" />
         </span>
       </button>
+      <div class="count-circle">{{card_data['count']}}</div>
       <figure class="image">
         <img :src="'src/assets/cards/' + card_data.name + '.png'" alt="Card image"/>
       </figure>

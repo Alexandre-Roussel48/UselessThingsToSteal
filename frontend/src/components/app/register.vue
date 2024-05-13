@@ -39,7 +39,20 @@ export default {
           };
 
           ws.onmessage = (event) => {
-            this.$store.commit('set_thefts', event.data);
+            const jsonData = JSON.parse(event.data);
+            const thefts = [];
+            thefts.push(jsonData);
+            this.$store.commit('set_thefts', {thefts: thefts});
+          };
+
+          ws.onclose = async () => {
+            await fetch(`${this.$url_prefix}/api/user/set_last_connection`, {
+              method: 'POST',
+              headers: {
+                'Content-Type':'application/json',
+                'authorization': 'Bearer ' + this.$store.state.token
+              }
+            });
           };
         } else {
           this.username = "";

@@ -4,6 +4,7 @@ export default {
   name: 'app_navbar',
   methods: {
     logout() {
+      this.$store.getters.get_ws.close();
       this.$store.commit('set_user_data', {
         username: "",
         token: ""
@@ -17,7 +18,6 @@ export default {
       this.$store.commit('set_thefts', {
         thefts: []
       });
-      this.$store.getters.get_ws.close();
       this.$router.push('/');
     }
   }
@@ -39,6 +39,9 @@ export default {
         </RouterLink>
         <RouterLink to="/vault" class="navbar-item">
           <img class="header_category" src="@/assets/vault.svg">
+        </RouterLink>
+        <RouterLink to="/forge" class="navbar-item">
+          <img class="header_category" src="@/assets/forge.svg">
         </RouterLink>
       </div>
       <div class="navbar-end">

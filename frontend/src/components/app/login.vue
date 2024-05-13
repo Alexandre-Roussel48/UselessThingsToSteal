@@ -44,6 +44,16 @@ export default {
             thefts.push(jsonData);
             this.$store.commit('set_thefts', {thefts: thefts});
           };
+
+          ws.onclose = async () => {
+            await fetch(`${this.$url_prefix}/api/user/set_last_connection`, {
+              method: 'POST',
+              headers: {
+                'Content-Type':'application/json',
+                'authorization': 'Bearer ' + this.$store.state.token
+              }
+            });
+          };
         } else {
           this.status = data['status'];
         }

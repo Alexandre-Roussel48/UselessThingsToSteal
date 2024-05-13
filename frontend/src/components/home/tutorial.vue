@@ -14,9 +14,9 @@ export default {
       }
     },
     right () {
-      if (this.num < 7) {
+      if (this.num < 8) {
         this.num += 1;
-        if (this.num==7) {
+        if (this.num==8) {
           this.$store.commit('disable_tutorial');
         }
       }
@@ -42,6 +42,17 @@ export default {
       <div class="navbar-start" v-if="this.num==5">
         <div class="navbar-item">
           <img class="header_category invisible" src="@/assets/tutorial/large_arrow.svg">
+        </div>
+        <div class="navbar-item">
+          <img class="header_category pulsate" src="@/assets/tutorial/little_arrow.svg">
+        </div>
+      </div>
+      <div class="navbar-start" v-if="this.num==6">
+        <div class="navbar-item">
+          <img class="header_category invisible" src="@/assets/tutorial/large_arrow.svg">
+        </div>
+        <div class="navbar-item">
+          <img class="header_category invisible" src="@/assets/tutorial/little_arrow.svg">
         </div>
         <div class="navbar-item">
           <img class="header_category pulsate" src="@/assets/tutorial/little_arrow.svg">
@@ -136,6 +147,14 @@ export default {
                 </div>
               </div>
               <div class="column is-10" v-if="this.num==6">
+                <div class="box">
+                  <h3 class="title is-4">Forge better cards 💪</h3>
+                  <p class="content">
+                    Forge some cards into better ones, you can cope uncommon, rare, epic and legendaries homie!
+                  </p>
+                </div>
+              </div>
+              <div class="column is-10" v-if="this.num==7">
                 <div class="box">
                   <h3 class="title">Ready to Roll ?</h3>
                   <p class="content">
