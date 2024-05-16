@@ -1,8 +1,6 @@
 - Adapt the gitignore file
 - setup Vite build output directory
 - Factoriser css
-- Page accueil, box scrollable leaderboard
-- Finir forge system
 - Implementer me page
 - Ajouter des admins
 - Deploy on dokku with Dockerfile
