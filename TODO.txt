@@ -1,6 +1,0 @@
-- Adapt the gitignore file
-- setup Vite build output directory
-- Factoriser css
-- Implementer me page
-- Ajouter des admins
-- Deploy on dokku with Dockerfile
