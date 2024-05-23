@@ -60,4 +60,27 @@ npm run dev
 
 ## Production
 
-**TODO**
+### Database
+
+```bash
+ssh dokku@cluster-ig3.igpolytech.fr postgres:create utts-database
+```
+
+### Backend
+
+```bash
+git remote add dokku dokku@cluster-ig3.igpolytech.fr:utts-backend
+ssh dokku@cluster-ig3.igpolytech.fr apps:create utts-backend
+ssh dokku@cluster-ig3.igpolytech.fr postgres:link utts-database utts-backend
+ssh dokku@cluster-ig3.igpolytech.fr config:set utts-backend KEY=VALUE
+git push dokku main:master
+```
+
+### Frontend
+
+```bash
+git remote add dokku dokku@cluster-ig3.igpolytech.fr:uselessThingsToSteal
+ssh dokku@cluster-ig3.igpolytech.fr apps:create uselessThingsToSteal
+ssh dokku@cluster-ig3.igpolytech.fr config:set uselessThingsToSteal KEY=VALUE
+git push dokku main:master
+```
