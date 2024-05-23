@@ -79,8 +79,8 @@ git push dokku main:master
 ### Frontend
 
 ```bash
-git remote add dokku dokku@cluster-ig3.igpolytech.fr:uselessThingsToSteal
-ssh dokku@cluster-ig3.igpolytech.fr apps:create uselessThingsToSteal
-ssh dokku@cluster-ig3.igpolytech.fr config:set uselessThingsToSteal KEY=VALUE
+git remote add dokku dokku@cluster-ig3.igpolytech.fr:utts
+ssh dokku@cluster-ig3.igpolytech.fr apps:create utts
+ssh dokku@cluster-ig3.igpolytech.fr config:set utts KEY=VALUE
 git push dokku main:master
 ```
