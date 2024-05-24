@@ -1,0 +1,11 @@
+services:
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 'a9ea0a4e23624e5d8ee15d4462c19010'
+      MYSQL_DATABASE: 'uselessThingsToSteal'
+      MYSQL_USER: 'thief'
+      MYSQL_PASSWORD: 'b0ac2e9b9ab347d2adc73e89f84e8586'
+    ports:
+      - 3306:3306

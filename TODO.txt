@@ -1,0 +1,4 @@
+- Admin page to list and delete users
+- Same origin front & back
+- https
+- fix checkConnection setInterval
