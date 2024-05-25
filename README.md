@@ -74,6 +74,14 @@ ssh dokku@cluster-ig3.igpolytech.fr apps:create utts-backend
 ssh dokku@cluster-ig3.igpolytech.fr postgres:link utts-database utts-backend
 ssh dokku@cluster-ig3.igpolytech.fr config:set utts-backend KEY=VALUE
 git push dokku main:master
+
+ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:set utts-backend email alexandre.roussel03@etu.umontpellier.fr
+ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend http:80:5000
+ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:enable utts-backend
+ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend https:443:5000
+ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend https:443:5001
+ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts-backend http:5000:5000
+ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts-backend http:80:5000
 ```
 
 ### Frontend
@@ -83,4 +91,11 @@ git remote add dokku dokku@cluster-ig3.igpolytech.fr:utts
 ssh dokku@cluster-ig3.igpolytech.fr apps:create utts
 ssh dokku@cluster-ig3.igpolytech.fr config:set utts KEY=VALUE
 git push dokku main:master
+
+ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:set utts email alexandre.roussel03@etu.umontpellier.fr
+ssh dokku@cluster-ig3.igpolytech.fr ports:add utts http:80:5002
+ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:enable utts
+ssh dokku@cluster-ig3.igpolytech.fr ports:add utts https:443:5002
+ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts http:5002:5002
+ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts http:80:5000
 ```
