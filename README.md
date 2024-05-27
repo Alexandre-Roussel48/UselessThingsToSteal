@@ -11,10 +11,10 @@ git clone https://github.com/Alexandre-Roussel48/UselessThingsToSteal.git
 
 cd UselessThingsToSteal
 
-cd backend
+cd UTTS_backend
 npm install
 
-cd ../frontend
+cd ../UTTS_frontend
 
 npm install
 cd ..
@@ -22,18 +22,19 @@ cd ..
 
 ## Config
 
-Rename file **database/docker-compose.yml.sample** -> **database/docker-compose.yml and complete informations**
-Rename file **backend/.env.sample** -> **backend/.env and complete informations**
+Rename file **UTTS_database/docker-compose.yml.sample** -> **UTTS_database/docker-compose.yml and complete informations**
+Rename file **UTTS_backend/.env.sample** -> **UTTS_backend/.env and complete informations**
+Rename file **UTTS_frontend/.env.sample** -> **UTTS_frontend/.env and complete informations**
 
 You can add or remove cards **carefully** in **backend/prisma/seed.js**.
 
 First time :
 
 ```bash
-cd database
+cd UTTS_database
 docker compose up --build &
 
-cd ../backend
+cd ../UTTS_backend
 
 npm run db
 
@@ -44,17 +45,17 @@ fg
 ## Run (development mode)
 
 ```bash
-cd database
+cd UTTS_database
 docker-compose up --build
 ```
 
 ```bash
-cd backend
+cd UTTS_backend
 npm run back
 ```
 
 ```bash
-cd frontend
+cd UTTS_frontend
 npm run dev
 ```
 
