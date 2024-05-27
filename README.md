@@ -79,8 +79,9 @@ ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:set utts-backend email alexandre
 ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend http:80:5000
 ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:enable utts-backend
 ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend https:443:5000
-ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend https:443:5001
+ssh dokku@cluster-ig3.igpolytech.fr ports:add utts-backend https:5001:5001
 ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts-backend http:5000:5000
+ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts-backend http:5001:5001
 ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts-backend http:80:5000
 ```
 
@@ -97,5 +98,5 @@ ssh dokku@cluster-ig3.igpolytech.fr ports:add utts http:80:5002
 ssh dokku@cluster-ig3.igpolytech.fr letsencrypt:enable utts
 ssh dokku@cluster-ig3.igpolytech.fr ports:add utts https:443:5002
 ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts http:5002:5002
-ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts http:80:5000
+ssh dokku@cluster-ig3.igpolytech.fr ports:remove utts http:80:5002
 ```
