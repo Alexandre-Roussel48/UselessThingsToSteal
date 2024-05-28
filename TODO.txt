@@ -1,5 +1,0 @@
-[x] Admin page to list and delete users
-[x] Same origin front & back
-[x] https
-[] wss
-[x] fix checkConnection setInterval
