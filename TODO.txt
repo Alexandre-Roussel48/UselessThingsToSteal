@@ -1,0 +1,21 @@
+[] refactor forge for card select in page
+[] link email for password recovery
+[] able to update user info
+[] leaderboard update on real time
+[] add "my collection" in me page to see what cards you had, shadow on cards you never had
+[] add a second leaderboard counting the "my collection"
+[] update login page to put register after a button
+[] phone version
+[] send to vault on drop, theft and forge when a card is received
+[] admin add new card for new seasons for ex.
+[] section inventory by rarities with number owned / total number
+[] placeholders for cards in vault (common  uncommon  rare  epic  legendary) in this order
+[] forge for exceding weigth points forge less rare cards until 0 (to think carefully cause it may break forge meta)
+[] add secret cards that are crafted from specific cards and that are stored in the vault
+[] if you get all the secret card you get a badge
+[] add gold, silver and bronze on the leaderboard
+[] in inventory being able to click on a card to see it in big with anim and put the weight on each rarity
+[] in forge, put the chances of drop (30% /2 30% *2)
+[] change last_connection to notifications, once read, delete them
+[] exchange cards with other players
+[] leaderboard scrollable because too much players
