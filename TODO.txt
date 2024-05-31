@@ -1,11 +1,12 @@
 [] refactor forge for card select in page
-[] link email for password recovery
+[] link email for password recovery and mail news for app updates
 [] able to update user info
 [] leaderboard update on real time
 [] add "my collection" in me page to see what cards you had, shadow on cards you never had
 [] add a second leaderboard counting the "my collection"
+[] add gold card to "my collection" if collected (100 co, 30 unco, 20 rare, 12 epic, 6 legendary)
 [] update login page to put register after a button
-[] phone version
+[] phone version responsive
 [] send to vault on drop, theft and forge when a card is received
 [] admin add new card for new seasons for ex.
 [] section inventory by rarities with number owned / total number
@@ -19,3 +20,11 @@
 [] change last_connection to notifications, once read, delete them
 [] exchange cards with other players
 [] leaderboard scrollable because too much players
+[] leaderboard add weight points of all cards owned
+[] increase legendary weight for forge
+[] remove canister anim
+[] getInventory give number of exemplaires for each card instead of sending all of them
+[] ^ maybe put number in inventory table and create new if 0 else increment number and remove totally if 0
+[] history for card thefts
+[] stats me page
+[] add limiter on login and register urgent
