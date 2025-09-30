@@ -1,3 +1,5 @@
+![Affiche UTTS](https://github.com/user-attachments/assets/2295cf3f-274a-4613-8a49-01f4c9f9c859)
+
 # UselessThingsToSteal
 
 **Collect the things so useless you steal them anyway**
